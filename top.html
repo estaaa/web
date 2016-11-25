@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>呼叫中心</title>
+<script src="./static/js/config.js"></script>
+<script src="./static/js/functions.js"></script>
+<link rel="stylesheet" type="text/css" href="./static/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="./static/css/style.css" />
+<script src="./static/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./static/bootstrap/js/bootstrap.min.js" />
+<link rel="stylesheet" type="text/css" href="./static/css/top.css" />
+<script>
+$(document).ready(function() {
+    $("#kf_login").click(function() {
+    	//alert($("#called").val());
+        $.post("{pigcms{:U('Index/wincall/kf_login')}", {phone: $("#called").val()},
+        function(data) {//data为反回值，function进行反回值处理
+            if(data==2){
+             alert("登录失败");
+            }
+        });
+    })
+})
+</script>
+</head>
+<body style="overflow: hidden; height: auto;">
+
+	<div class="top-nav">
+		<ul>
+			<li>坐席号:<span id="agentNum"></span></li>
+			<li>分机号:<span id="agentPhone"></span></li>
+			<li>坐席状态:<span id="seat_state" class="label label-success"></span></li>
+			<li>队列状态:<span id="queue_state" class="label label-success"></span></li>
+
+			<li>状态消息:<span id="obj_content" class="label label-info"></span></li>
+			<li style="height: 30px;overflow:hidden;"> 
+				<label for="inputEmail3" class=" control-label" style="float:left;display:block;">外呼号码：</label> <input style="float:left;display:block; height:20px;" name="name" id='called' type="text" value="" class=" input-sm" />
+				   <input  name="kf_login" id='kf_login' type="button" style=" width:50px; height:20px;" value="登录" class="" />
+
+			<li style="float:right"> <a href="index.php" target="_blank" style="color:red;float:right">商城首页</a></li>
+			<li class="logout"><a href="javascript:;">退出登录</a></li>
+		</ul>
+	</div>
+	<div class="row">
+
+		<div class="col-lg-12">
+			<div id="buttons" class="">
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_login" disabled
+						style="background: transparent url(./static/images/btn_login_e.gif) repeat scroll center center; cursor: default;">登录</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_logout" disabled
+						style="background: transparent url(./static/images/btn_logout_d.gif) repeat scroll center center; cursor: default;">注销</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_unbusy" disabled
+						style="background: transparent url(./static/images/btn_unbusy_d.gif) repeat scroll center center; cursor: default;">置闲</button>
+				</div>
+				<div id="busyDiv">
+				</div>
+				<!-- <div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_restore" disabled >恢复</button>
+				</div> -->
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_restore" disabled
+						style="background: transparent url(./static/images/btn_hold_d.gif) repeat scroll center center; cursor: default;">恢复</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_hold" disabled
+						style="background: transparent url(./static/images/btn_hold_d.gif) repeat scroll center center; cursor: default;">保持</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_dialinner" disabled
+						style="background: transparent url(./static/images/btn_dialinner_d.gif) repeat scroll center center; cursor: default;">呼叫坐席</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_dialouter" disabled
+						style="background: transparent url(./static/images/btn_dialouter_d.gif) repeat scroll center center; cursor: default;">呼叫外线</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_hangup" disabled
+						style="background: transparent url(./static/images/btn_hangup_d.gif) repeat scroll center center; cursor: default;">挂断</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_consultinner"
+						disabled
+						style="background: transparent url(./static/images/btn_consultinner_d.gif) repeat scroll center center; cursor: default;">咨询内线</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_consultouter"
+						disabled
+						style="background: transparent url(./static/images/btn_consultouter_d.gif) repeat scroll center center; cursor: default;">咨询外线</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_consultback"
+						disabled
+						style="background: transparent url(./static/images/btn_consultback_d.gif) repeat scroll center center; cursor: default;">咨询接回</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_threeway" disabled
+						style="background: transparent url(./static/images/btn_threeway_d.gif) repeat scroll center center; cursor: default;">三方</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_threewayback"
+						disabled
+						style="background: transparent url(./static/images/btn_threewayback_d.gif) repeat scroll center center; cursor: default;">三方接回</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_transfer" disabled
+						style="background: transparent url(./static/images/btn_transfer_d.gif) repeat scroll center center; cursor: default;">转接</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_evaluate" disabled
+						style="background: transparent url(./static/images/btn_evaluate_d.gif) repeat scroll center center; cursor: default;">转评价</button>
+				</div>
+				
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_transque" disabled
+						style="background: transparent url(./static/images/btn_transque_d.gif) repeat scroll center center; cursor: default;">转技能组</button>
+				</div>
+				<div class="color-swatch ">
+					<button class="btn btn-primary btn-sm" id="btn_blindtrans" disabled
+						style="background: transparent url(./static/images/btn_blindtrans_d.gif) repeat scroll center center; cursor: default;">盲转</button>
+				</div>
+			</div>
+
+			
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+
+	<div id="free-agent-modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">选择呼叫的坐席</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-bordered table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>工号</th>
+								<th>名称</th>
+								<th>分机号</th>
+							</tr>
+						</thead>
+						<tbody id="tbody"></tbody>
+					</table>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<div id="online-agent-modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">选择通话中的坐席</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-bordered table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>分机号</th>
+								<th>通话时长</th>
+							</tr>
+						</thead>
+						<tbody id="online-agent-tbody"></tbody>
+					</table>
+				</div>
+				<div class="form-group">
+					<label for="callerid" class="col-sm-2 control-label">外呼时显示的主叫号码: </label>
+					<div class="col-sm-4">
+						<select id="callerid" name="callerid" class="form-control"></select>
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label for="groupid" class="col-sm-2 control-label">外呼时使用的技能组：</label>
+					<div class="col-sm-4">
+						<select id="groupid" class="form-control"></select>
+					</div>
+					<label for="proid" class="col-sm-2 control-label">自动外呼项目ID: </label>
+					<div class="col-sm-4">
+						<input id="proid" name="proid" value="" placeholder="自动外呼的项目ID，非自动外呼情况无需使用"  class="form-control" size="20">
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<div id="queue-modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">选择转接的技能组</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-bordered table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>技能组名称</th>
+							</tr>
+						</thead>
+						<tbody id="queue-tbody"></tbody>
+					</table>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+	<script src="./static/js/jquery.min.js" language="javascript"></script>
+	<script src="./static/js/socket.io.js" language="JavaScript"></script>
+	<script src="./static/js/jquery.wincall.v2.js" language="javascript"></script>
+	<script src="./static/js/jquery.md5.js" language="javascript"></script>
+	<script src="./static/js/top.js" language="javascript"></script>
+</body>
+</html>

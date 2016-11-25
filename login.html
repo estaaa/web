@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>呼叫中心--登录</title>
+
+<link rel="stylesheet" type="text/css"
+	href="./static/css/style.css" />
+    <script src="./static/js/config.js"></script>
+    <script src="./static/js/functions.js"></script>
+<script src="./static/js/jquery-1.8.3.min.js"></script>
+<script language="javascript">
+
+</script> 
+
+<style type="text/css">
+
+.loginbox ul li {
+  margin-bottom: 10px;
+}
+.loginbox ul {
+  margin-left: 285px;
+  margin-top: 70px;
+}
+.loginuser {
+  font-size: 14px;
+  font-weight: bold;
+  height: 40px;
+  line-height: 30px;
+  padding-left: 44px;
+  width: 200px;
+}
+</style>
+</head>
+<body style="background-color:#1c77ac; background-image:url(./static/images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
+
+    <div id="mainBody">
+      <div id="cloud1" class="cloud"></div>
+      <div id="cloud2" class="cloud"></div>
+    </div>  
+<div class="logintop">    
+    <span>欢迎登录后台管理界面平台</span>    
+    <ul>
+    <!-- <li><a href="#">回首页</a></li> -->
+    </ul>    
+    </div>
+    
+    <div class="loginbody">
+    
+    <span class="systemlogo"></span> 
+       
+    <div class="loginbox">
+    
+    <ul>
+    <form action="javascript:;" method="post">
+    <li><input name="agentNum" type="text" class="loginuser" value="" placeholder="坐席号"  id="agentNum" autocomplete="off"/>
+        <div id="error_tips" class="error_tips">
+            <s></s>
+            <span id="error_logo"></span>
+            <span id="err_m"></span>
+        </div>
+    </li>
+    
+    <li><input name="agentPhone" type="text" class="loginuser" value="" id="agentPhone" placeholder="分机号" /></li>
+    <li><input name="agentPass" type="password" class="loginuser" value=""  id="agentPass" placeholder="密码" /></li>
+   
+    <li><input name="" type="submit" class="loginbtn" value="登录" id="btn_login"/></li>
+    </form>
+    </ul>
+    
+    
+    </div>
+    
+    </div>
+    
+</body>
+
+</html>
+	<script src="./static/js/jquery.min.js" language="javascript"></script>
+	<script src="./static/js/socket.io.js" language="JavaScript"></script>
+	<script src="./static/js/jquery.wincall.v2.js" language="javascript"></script>
+	<script src="./static/js/jquery.md5.js" language="javascript"></script>
+	<script src="./static/login/js/login.js" language="JavaScript"></script>
+	<script src="./static/login/js/cloud.js"></script>
+</body>
+</html>

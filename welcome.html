@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>欢迎页面</title>
+<link rel="stylesheet" type="text/css" href="./static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./static/bootstrap/css/bootstrap.min.css" />
+    <script src="./static/js/jquery-1.8.3.min.js"></script>
+<script>
+    function call_inner($tr,callerid){
+        
+        var $tbody = $('#tbody');
+        $('#callerid').html(callerid);
+        $tbody.html($tr);
+        var height = $(window).height();
+        $('.core').css({'height':height});
+         $('.call_c').show();
+        $('.core').show();
+    }
+    $('.call_table tr').live('click',function(){
+        $('.call_c').hide();
+        $('.core').hide();
+        var agid = $(this).find('.ag_id').html();
+        var callerid=$('#callerid').html();
+        parent.call_phone_id(agid,callerid);
+    })
+    $('.close_x').live('click',function(){
+        $('.call_c').hide();
+        $('.core').hide();
+    })
+</script>
+<style>
+    .call_c{
+    background: #fff;
+     overflow: hidden;
+    padding:10px 10px;
+    padding-bottom: 10px;
+    width:30%;
+    height:auto;
+    position: fixed;
+    left:25%;
+    top: 100px;
+    z-index: 100000;
+    background:#6caef5;
+    position: relative;
+    display: none;
+}
+.call_table{
+    margin:0;
+    background: #fff;
+   
+}
+.close_x{
+    position: absolute;
+    right:10px;
+    top:5px;
+    cursor:pointer;
+    
+    z-index: 1000900;
+}
+.call_c .head{
+    
+    padding:10px 0;
+    padding-top: 0;
+}
+.call_table tr{
+    cursor: pointer;
+}
+.tr_h{
+    background: #dedede;
+}
+.core{
+    display: none;
+    width:100%;
+    position: absolute;
+    top:0;
+    z-index: 1000;
+    background:#000;
+    opacity: 0.7;
+}
+</style>
+</head>
+
+
+<body>
+<div class="core"></div>
+   <div id="ag_id" style="display:none;"></div>
+    <div id="callerid" style="display:none;"></div>
+    <div class="call_c">
+        <div class="head">内呼</div>
+        <div class="close_x">X</div>
+        <table class="table table-bordered table-hover table-condensed call_table">
+            <thead>
+                <tr class="tr_h">
+                    <th>ID</th>
+                    <th>工号</th>
+                    <th>名称</th>
+                    <th>分机号</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">欢迎使用</a></li>
+    </ul>
+    </div>
+    
+    <div class="mainindex">
+    
+    
+    <div class="welinfo">
+    <span><img src="./static/images/sun.png" alt="天气" /></span>
+    <b>您好，欢迎使用一键呼叫管理系统</b>
+    <!-- <a href="#">帐号设置</a> -->
+    </div>
+    
+    <div class="welinfo">
+    <span><img src="./static/images/time.png" alt="时间" /></span>
+    <i>当前的时间为：<?php echo date('Y-m-d H:i:s', time());?></i>
+    </div>
+    
+    <div class="xline"></div>
+    
+    <!-- <ul class="iconlist">
+    
+    <li><img src="images/ico01.png" /><p><a href="#">管理设置</a></p></li>
+    <li><img src="images/ico02.png" /><p><a href="#">发布文章</a></p></li>
+    <li><img src="images/ico03.png" /><p><a href="#">数据统计</a></p></li>
+    <li><img src="images/ico04.png" /><p><a href="#">文件上传</a></p></li>
+    <li><img src="images/ico05.png" /><p><a href="#">目录管理</a></p></li>
+    <li><img src="images/ico06.png" /><p><a href="#">查询</a></p></li> 
+            
+    </ul>
+    
+    <div class="ibox"><a class="ibtn"><img src="images/iadd.png" />添加新的快捷功能</a></div> -->
+    
+    <div class="xline"></div>
+    <div class="box"></div>
+    
+    <div class="welinfo">
+    <!-- <span><img src="images/dp.png" alt="提醒" /></span> -->
+  <!--   <b>Uimaker信息管理系统使用指南</b> -->
+    </div>
+    
+  
+    
+    
+
+</body>
+
+</html>
